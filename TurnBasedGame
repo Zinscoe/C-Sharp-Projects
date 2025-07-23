@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TurnBasedGame
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Initializes variables needed
+            int playerHp = 40;
+            int enemyHp = 20;
+
+            int playerAttack = 5;
+            int enemyAttack = 7;
+            int healAmount = 5;
+            Random random = new Random();
+
+            // Creates a while loop that runs while playerHp is above 0 and enemyHp is above 0
+            while(playerHp > 0 && enemyHp > 0)
+            {
+                // Player Turn
+                Console.WriteLine("-- Player turn --");
+                Console.WriteLine("Player Hp - " + playerHp + ". Enemy Hp - " + enemyHp);
+                Console.WriteLine("Enter 'a' to attack or 'h' to heal.");
+
+                // This creates a string that reads the Users input and saves it to that string of choice
+                string choice = Console.ReadLine();
+
+                // If loop that runs if the Users input is 'a' or else it's not 'a'
+                if (choice == "a")
+                {
+                    enemyHp -= playerAttack;
+                    Console.WriteLine("Player attacks enemy and deals " + playerAttack + " damage!");
+                }
+                else
+                {
+                    playerHp -= healAmount;
+                    Console.WriteLine("Player restores " + healAmount + " health points!");
+                }
+
+                // Enemy Turn
+                // if loop that runs if the enemyHp is above 0
+                if (enemyHp > 0)
+                {
+                    Console.WriteLine("-- Enemy Turn --");
+                    Console.WriteLine("Player Hp - " + playerHp + ". Enemy Hp - " + enemyHp);
+                    int enemyChoice = random.Next(0, 2);
+                    
+                    // if loop that runs as long as enemyChoice equals 0
+                    if (enemyChoice == 0)
+                    {
+                        playerHp -= enemyAttack;
+                        Console.WriteLine("Enemy attacks and deals " + enemyAttack + " damage!");
+                    }
+                    else
+                    {
+                        enemyHp += healAmount;
+                        Console.WriteLine("Enemy restores " + healAmount + " health points!");
+                    }
+                }
+            }
+            // runs an if loop if the playerHp is greater than 0
+            if (playerHp > 0)
+            {
+                Console.WriteLine("Congratulations, you have won!");
+            }
+            else
+            {
+                Console.WriteLine("You lose!");
+            }
+        }
+    }
+}
